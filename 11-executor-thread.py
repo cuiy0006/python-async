@@ -5,7 +5,7 @@ import concurrent.futures
 import time
 import random
 
-def blocks(n):
+def io_bound(n):
     start = time.perf_counter()
     i = random.randint(1, 10)
     time.sleep(i)
@@ -16,7 +16,7 @@ def blocks(n):
 async def run_blocking_tasks(executor):
     loop = asyncio.get_event_loop()
     blocking_tasks = [
-        loop.run_in_executor(executor, blocks, i)
+        loop.run_in_executor(executor, io_bound, i)
         for i in range(6)
     ]
 
